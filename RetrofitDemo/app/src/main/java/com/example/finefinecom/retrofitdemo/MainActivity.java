@@ -23,20 +23,51 @@ public class MainActivity extends AppCompatActivity {
 
     public void click(View view)
     {
-        Retrofit retrofit = new Retrofit.Builder().baseUrl("https://api.github.com")
-                .addConverterFactory(GsonConverterFactory.create())
+//        Retrofit retrofit = new Retrofit.Builder().baseUrl("https://api.github.com")
+//                .addConverterFactory(GsonConverterFactory.create())
+//                .build();
+//        APIInterface service = retrofit.create(APIInterface.class);
+//        Call<TestModel> model = service.repo("Guolei1130");
+//        model.enqueue(new Callback<TestModel>() {
+//            @Override
+//            public void onResponse(Response<TestModel> response, Retrofit retrofit) {
+//                Log.d("TAG", "onResponse: "+response.body().getLogin());
+//            }
+//
+//            @Override
+//            public void onFailure(Throwable t) {
+//                Log.d("TAG", "onFailure: "+t.getMessage());
+//            }
+//        });
+
+        request();
+    }
+
+    public void request()
+    {
+        //创建retrofit对象
+        Retrofit retrofit=new Retrofit.Builder()
+                .baseUrl("http://fy.iciba.com/")
+                .addConverterFactory(GsonConverterFactory.create()) //设置Gson解析器
                 .build();
-        APIInterface service = retrofit.create(APIInterface.class);
-        Call<TestModel> model = service.repo("Guolei1130");
-        model.enqueue(new Callback<TestModel>() {
+
+        //创建网络接口实例
+        GetRequest_Interface request_interface=retrofit.create(GetRequest_Interface.class);
+
+        //对发送请求 进行封装
+        Call<Translation> call=request_interface.getCall();
+
+        call.enqueue(new Callback<Translation>() {
+            //请求成功时回调
             @Override
-            public void onResponse(Response<TestModel> response, Retrofit retrofit) {
-                Log.d("TAG", "onResponse: "+response.body().getLogin());
+            public void onResponse(Response<Translation> response, Retrofit retrofit) {
+                response.body().show();
             }
 
+            //请求失败时回调
             @Override
             public void onFailure(Throwable t) {
-                Log.d("TAG", "onFailure: "+t.getMessage());
+                System.out.println("连接失败");
             }
         });
     }
