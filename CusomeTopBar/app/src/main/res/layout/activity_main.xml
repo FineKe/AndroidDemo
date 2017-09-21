@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.litesky.cusometopbar.MainActivity">
+
+   <com.litesky.cusometopbar.TopBar
+       android:layout_width="match_parent"
+       android:layout_height="40dp"
+       app:leftText="几把"
+       app:rightText="猪"
+       app:title="狗头">
+
+   </com.litesky.cusometopbar.TopBar>
+</LinearLayout>
